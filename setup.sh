@@ -29,7 +29,7 @@ apt-get update
 echo -e "\n${G}Updated! ${F}"
 
 echo -e "\n${G}Installing Wireguard${F}"
-apt-get install wireguard -y
+apt-get install wireguard qrencode -y
 echo -e "\n${G}Installed${F}"
 
 echo -e "\n${G}Now to the Configuration Partner!${F}"
@@ -152,3 +152,5 @@ esac
 echo -e "\n${G}Give script run permission and move to /usr/bin${F}"
 chmod 755 wgclient
 mv wgclient /usr/bin/wgclient
+echo -e "\n${G}FINISH! YOU ARE GOOD TO GO, ONE LAST STEP!!!${F}"
+echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT${F}"
