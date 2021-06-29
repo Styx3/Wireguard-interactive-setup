@@ -88,9 +88,9 @@ echo '
 #script for managing wireguard users
 function add(){
 echo args:$1 $2 $3 $4
-wg genkey | tee PeerPrivate.key | wg pubkey > PeerPublic.key
-Private=`cat PeerPrivate.key`
-Public=`cat PeerPublic.key`
+wg genkey | tee /etc/wireguard/PeerPrivate.key | wg pubkey > /etc/wireguard/PeerPublic.key
+Private=`cat /etc/wireguard/PeerPrivate.key`
+Public=`cat /etc/wireguard/PeerPublic.key`
 rm -rf PeerP*
 echo -e "Private Key:   "$Private"\nPublic Key: "$Public
 echo "[Interface]" > $3".conf"
@@ -98,7 +98,7 @@ echo "PrivateKey = "$Private >> $3".conf"
 echo "Address = "$2"/32" >> $3".conf"
 echo "DNS = 1.1.1.1" >> $3".conf"
 echo "[Peer]" >> $3".conf"
-echo "PublicKey = "$(cat ServerPublic) >> $3".conf"
+echo "PublicKey = "$(cat /etc/wireguard/ServerPublic) >> $3".conf"
 echo "AllowedIPs = "$4 >> $3".conf"
 echo "Endpoint = '$(curl ifconfig.co):$port'" >> $3".conf"
 qrencode -t UTF8 < $3".conf"
@@ -149,8 +149,10 @@ case $1 in
         ;;
 esac
 ' > wgclient
-echo -e "\n${G}Give script run permission and move to /usr/bin${F}"
+echo -e "\n${G}Give script run permission and link to /usr/bin${F}"
 chmod 755 wgclient
 mv wgclient /usr/bin/wgclient
+echo -e "\n${G}now you can create users by running wgclient\n${F}"
+wgclient
 echo -e "\n${G}FINISH! YOU ARE GOOD TO GO, ONE LAST STEP!!!${F}"
 echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT\n${F}"
