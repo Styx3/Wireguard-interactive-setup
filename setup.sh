@@ -93,15 +93,15 @@ Private=`cat /etc/wireguard/PeerPrivate.key`
 Public=`cat /etc/wireguard/PeerPublic.key`
 rm -rf PeerP*
 echo -e "Private Key:   "$Private"\nPublic Key: "$Public
-echo "[Interface]" > $3".conf"
-echo "PrivateKey = "$Private >> $3".conf"
-echo "Address = "$2"/32" >> $3".conf"
-echo "DNS = 1.1.1.1" >> $3".conf"
-echo "[Peer]" >> $3".conf"
-echo "PublicKey = "$(cat /etc/wireguard/ServerPublic) >> $3".conf"
-echo "AllowedIPs = "$4 >> $3".conf"
-echo "Endpoint = '$(curl ifconfig.co):$port'" >> $3".conf"
-qrencode -t UTF8 < $3".conf"
+echo "[Interface]" > /etc/wireguard/$3".conf"
+echo "PrivateKey = "$Private >> /etc/wireguard/$3".conf"
+echo "Address = "$2"/32" >> /etc/wireguard/$3".conf"
+echo "DNS = 1.1.1.1" >> /etc/wireguard/$3".conf"
+echo "[Peer]" >> /etc/wireguard/$3".conf"
+echo "PublicKey = "$(cat /etc/wireguard/ServerPublic) >> /etc/wireguard/$3".conf"
+echo "AllowedIPs = "$4 >> /etc/wireguard/$3".conf"
+echo "Endpoint = '$(curl ifconfig.co):$port'" >> /etc/wireguard/$3".conf"
+qrencode -t ansiutf8 < $3".conf"
 wg set wg0 peer $Public allowed-ips $2
 }
 
