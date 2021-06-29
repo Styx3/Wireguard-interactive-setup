@@ -53,7 +53,7 @@ echo -e "${G}Public key:$(cat ServerPublic)${F}"
 echo -e "${G}\nSetting up conf file${F}\n"
 
 echo "[Interface]" > wg0.conf
-read -r -p "Choose your VPN private network subnet address default:10.10.10.0/24 " subnet
+read -r -p "Choose your VPN private network subnet address default:10.10.10.1/24 " subnet
 if [ -z "$subnet" ]
 then
 	subnet="10.10.10.0/24"
@@ -83,8 +83,14 @@ systemctl enable --now wg-quick@wg0
 
 echo -e "${G}\n Deploy Script to easily Manage users${F}"
 
-echo '
-#!/bin/bash
+echo '#!/bin/bash
+
+if [ $(id -u) -ne 0 ]
+then 
+	echo -e "${R}Please run Command as sudo or root${F}\n"
+ 	exit
+fi
+
 #script for managing wireguard users
 function add(){
 echo args:$1 $2 $3 $4
@@ -101,7 +107,7 @@ echo "[Peer]" >> /etc/wireguard/$3".conf"
 echo "PublicKey = "$(cat /etc/wireguard/ServerPublic) >> /etc/wireguard/$3".conf"
 echo "AllowedIPs = "$4 >> /etc/wireguard/$3".conf"
 echo "Endpoint = '$(curl ifconfig.co):$port'" >> /etc/wireguard/$3".conf"
-qrencode -t ansiutf8 < $3".conf"
+qrencode -t ansiutf8 < /etc/wireguard/$3".conf"
 wg set wg0 peer $Public allowed-ips $2
 }
 
