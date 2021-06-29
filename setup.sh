@@ -56,7 +56,7 @@ echo "[Interface]" > wg0.conf
 read -r -p "Choose your VPN private network subnet address default:10.10.10.1/24 " subnet
 if [ -z "$subnet" ]
 then
-	subnet="10.10.10.0/24"
+	subnet="10.10.10.1/24"
 fi
 echo "Address = $subnet" >> wg0.conf
 
