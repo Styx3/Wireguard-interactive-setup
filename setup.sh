@@ -153,4 +153,4 @@ echo -e "\n${G}Give script run permission and move to /usr/bin${F}"
 chmod 755 wgclient
 mv wgclient /usr/bin/wgclient
 echo -e "\n${G}FINISH! YOU ARE GOOD TO GO, ONE LAST STEP!!!${F}"
-echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT${F}"
+echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT\n${F}"
