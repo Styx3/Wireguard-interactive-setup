@@ -5,4 +5,5 @@ helps with wireguard setup and makes it easier to manage users with script
 * Ubuntu 20.04.2 LTS ✔
 
 # Changelogs
-* Initial Release
+* Sets UP wireguard on host machine
+* Deployes script for user management
