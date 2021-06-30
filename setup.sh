@@ -162,3 +162,13 @@ echo -e "\n${G}now you can create users by running wgclient\n${F}"
 wgclient
 echo -e "\n${G}FINISH! YOU ARE GOOD TO GO, ONE LAST STEP!!!${F}"
 echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT\n${F}"
+
+for i in {20..1}
+do 
+	tput cup 99 $l
+	echo -n "Automatic Reboot in: $i, Press ^C (CTRL+C) to cancel"
+	sleep 1
+	if [[ $i == 0 ]]; then
+		reboot""
+	fi
+done
