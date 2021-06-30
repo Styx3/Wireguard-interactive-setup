@@ -166,9 +166,9 @@ echo -e "\n${Y}REBOOT HOST FOR SELINUX TO TAKE EFFECT\n${F}"
 for i in {20..1}
 do 
 	tput cup 99 $l
-	echo -n "Automatic Reboot in: $i, Press ^C (CTRL+C) to cancel"
+	echo -n "Automatic Reboot in: $i, Press ^C (CTRL+C) to cancel\n"
 	sleep 1
-	if [[ $i == 0 ]]; then
+	if [[ $i == 1 ]]; then
 		reboot""
 	fi
 done
