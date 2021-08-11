@@ -43,7 +43,7 @@ cd /etc/wireguard/
 echo -e "${G}\nSetting umask to safe keys ${F}"
 umask 077;
 echo -e "${G}\nGenerating key pair${F}"
-wg genkey > ServerPrivate | cat ServerPrivate | wg pubkey > ServerPublic
+wg genkey | tee ServerPrivate | wg pubkey > ServerPublic
 
 echo -e "THIS IS SUPER SECRET KEY THAT NOBODY SHOULD KNOW, ONLY READABLE BY ROOT BY DEFAULT\nYOU WILL SEE IT HERE ONLY ONCE"
 echo -e "${G}Private key:$(cat ServerPrivate)${F}"
